@@ -18,5 +18,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 currentPlayer = currentPlayer === "X" ? "O" : "X";
             }
         });
+
+        // Add hover effect with mouseenter and mouseleave events
+        square.addEventListener("mouseenter", () => {
+            if (!gameState[index]) { // Only show hover effect if the square is empty
+                square.classList.add("hover");
+            }
+        });
+
+        square.addEventListener("mouseleave", () => {
+            square.classList.remove("hover");
+        });
     });
 });
