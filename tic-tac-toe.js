@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const gameState = Array(9).fill(null); // Initialize an array to track the state of the game
     let currentPlayer = "X"; // Start with player "X"
     let gameOver = false; // Track if the game has ended
+    const newGameButton = document.querySelector(".btn"); // The "New Game" button
 
     // Winning combinations
     const winningCombinations = [
@@ -52,6 +53,28 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Reset game function
+    function resetGame() {
+        // Clear game state
+        for (let i = 0; i < gameState.length; i++) {
+            gameState[i] = null; // Reset game state array
+        }
+
+        // Clear squares
+        squares.forEach(square => {
+            square.textContent = ""; // Clear X or O from each square
+            square.classList.remove("X", "O"); // Remove "X" and "O" classes for styling
+        });
+
+        // Reset the status message
+        status.textContent = "Move your mouse over a square and click to play an X or an O.";
+        status.classList.remove("you-won"); // Remove the "you-won" styling class
+
+        // Reset game variables
+        currentPlayer = "X"; // Start again with player "X"
+        gameOver = false; // Allow game to be played again
+    }
+
     // Initialize the game board and add event listeners
     squares.forEach((square, index) => {
         square.classList.add("square");
@@ -70,4 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             square.classList.remove("hover");
         });
     });
+
+    // Add click event listener to the "New Game" button
+    newGameButton.addEventListener("click", resetGame);
 });
